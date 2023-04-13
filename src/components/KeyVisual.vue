@@ -19,12 +19,19 @@
         </span>
       </div>
     </div>
+    <div class="scroll-notification">
+      <button type="button">
+        <DishAnime />
+        <h6>TASTE US NOW!</h6>
+      </button>
+    </div>
   </section>
 </template>
 
 <script>
 // @ is an alias to /src
 import LogoComponent from '@/components/LogoComponent.vue';
+import DishAnime from '@/components/DishAnime.vue';
 
 export default {
   data() {
@@ -34,6 +41,7 @@ export default {
   },
   components: {
     LogoComponent,
+    DishAnime,
   },
   mounted() {
     this.checkZoom();
@@ -137,6 +145,41 @@ section {
         border-radius: 10px;
       }
     }
+  }
+}
+.scroll-notification {
+  position: absolute;
+  bottom: 75px;
+  left: 50%;
+  color: $white;
+  transform: translateX(-50%);
+  &::before, &::after {
+    @include beforeafter;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    width: 1px;
+    transform: translateX(-50%);
+  }
+  &::before {
+    height: 130px;
+    margin-top: 30px;
+    background-color: #808080;
+  }
+  &::after {
+    height: 45px;
+    margin-top: 30px;
+    background-color: $white;
+  }
+  button {
+    padding: 0;
+    color: currentColor;
+    background-color: transparent;
+    border: 0;
+  }
+  h6 {
+    margin-top: 10px;
+    margin-bottom: 0;
   }
 }
 </style>
