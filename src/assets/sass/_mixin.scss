@@ -1,0 +1,139 @@
+// hamburger: helper mixin
+@mixin hamburger_tint($color: #000, $tint_text: false, $labelselector: '+ label') {
+  #{$labelselector} {
+    i, &::before, &::after {
+      background-color: $color;
+    }
+    @if $tint_text {
+      span {
+        color: $color;
+      }
+    }
+  }
+}
+
+// hamburger: main mixin
+@mixin hamburger($width: 30px, $thickness: 3px, $gap: 7px, $color: $white, $background: transparent, $tint_text: false, $radius: 3px, $radius_background: 0, $anim: 0.25s, $labelselector: '+ label', $padding: 0, $text: 'right', $style: false) {
+  $height: ($thickness*3) + ($gap*2);
+  @if $background != transparent and $padding == 0 {
+    $padding: round(($thickness + $gap) / 1.5);
+  }
+  display: none;
+  #{$labelselector} {
+    user-select: none;
+    position: relative;
+    display: block;
+    width: $width;
+    height: $height;
+    border: $padding solid transparent;
+    z-index: 1050;
+    line-height: $height;
+    white-space: nowrap;
+    background: $background;
+    border-radius: $radius_background;
+    span {
+      display: inline-block;
+      position: absolute;
+      left: 100%;
+      margin-top: 1px;
+      margin-left: $padding;
+      transition: color $anim;
+      @if $text == false {
+        display: none;
+      }
+      @elseif $text == 'left' {
+        left: auto;
+        right: 100%;
+        margin-left: 0;
+        margin-right: $padding;
+      }
+      &::before, &::after {
+        content: '';
+        display: inline-block;
+        min-width: 10px;
+        width: $width*0.2;
+      }
+    }
+    i, &::before, &::after {
+      position: absolute;
+      right: 0;
+      display: block;
+      will-change: transform, background-color;
+      width: $width;
+      height: $thickness;
+      border-radius: $radius;
+      transition: transform $anim, background-color $anim;
+      backface-visibility: hidden;
+      outline: 1px solid transparent; // Firefox jagged animation fix
+    }
+    i {
+      top: $thickness + $gap;
+      // hide text
+      font-size: 0;
+      color: transparent;
+      line-height: 0;
+      @if $style == 'align-left' {
+        max-width: $width * 0.75;
+        transform-origin: 66% center;
+      } @elseif $style == 'align-right' {
+        max-width: $width * 0.75;
+        margin-left: $width * 0.25;
+        transform-origin: 33% center;
+      }
+    }
+    &::before, &::after {
+      content: '';
+    }
+    &::before {
+      top: 0;
+    }
+    &::after {
+      bottom: 0;
+      width: 86.67%;
+    }
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  &:checked {
+    @if $anim != -1 {
+      #{$labelselector} {
+        i {
+          transform: scaleX(0.001);
+        }
+        &::before {
+          transform: translateY($gap + $thickness) rotate(45deg);
+        }
+        &::after {
+          width: 100%;
+          transform: translateY(-($gap + $thickness)) rotate(-45deg);
+        }
+      }
+    }
+  }
+  @include hamburger_tint($color, $tint_text, $labelselector);
+}
+
+@mixin list($margin: 0, $padding: 0, $style: none) {
+  margin: $margin;
+  padding: $padding;
+  list-style: $style;
+}
+
+@mixin beforeafter($content: '', $display: block) {
+  content: $content;
+  display: $display;
+}
+
+@mixin ellipsis() {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+@mixin lineclamp($line) {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: $line;
+  -webkit-box-orient: vertical;
+}
