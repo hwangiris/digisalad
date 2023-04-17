@@ -1,5 +1,7 @@
+@import "mixins/breakpoint";
+
 // hamburger: helper mixin
-@mixin hamburger_tint($color: #000, $tint_text: false, $labelselector: '+ label') {
+@mixin hamburger_tint($color: $black, $tint_text: false, $labelselector: '+ label') {
   #{$labelselector} {
     i, &::before, &::after {
       background-color: $color;
@@ -13,7 +15,7 @@
 }
 
 // hamburger: main mixin
-@mixin hamburger($width: 30px, $thickness: 3px, $gap: 7px, $color: $white, $background: transparent, $tint_text: false, $radius: 3px, $radius_background: 0, $anim: 0.25s, $labelselector: '+ label', $padding: 0, $text: 'right', $style: false) {
+@mixin hamburger($width: 30px, $thickness: 3px, $gap: 7px, $color: var(--ham-color), $background: transparent, $tint_text: false, $radius: 3px, $radius_background: 0, $anim: 0.25s, $labelselector: '+ label', $padding: 0, $text: 'right', $style: false) {
   $height: ($thickness*3) + ($gap*2);
   @if $background != transparent and $padding == 0 {
     $padding: round(($thickness + $gap) / 1.5);

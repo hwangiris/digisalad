@@ -1,6 +1,10 @@
 @import url('https://use.typekit.net/wel8ibk.css');
 @import 'import';
 
+:root {
+  --ham-color: #{$white};
+}
+
 @import 'common';
 @import 'typographic';
 

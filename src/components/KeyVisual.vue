@@ -6,7 +6,10 @@
       </div>
     </div>
     <div class="container">
-      <LogoComponent :style="logoTheme" width="200" height="88" />
+      <div class="logo" ref="kvLogo" :class="{'opacity-0': isSticky}">
+        <LogoComponent :style="logoTheme" width="200" height="90" />
+      </div>
+      <div class="subtitle h5">DIGITAL AGENCY</div>
       <div class="display">
         <span>
           We create
@@ -36,9 +39,19 @@ import DishAnime from '@/components/DishAnime.vue';
 export default {
   data() {
     return {
+      isSticky: null,
       logoTheme: 'light',
+      scroll: {
+        offsetTop: null,
+        offsetLeft: null,
+        container: null,
+        margin: null,
+        leftSpace: null,
+        window: null,
+      },
     };
   },
+  props: ['emit-sticky'],
   components: {
     LogoComponent,
     DishAnime,
@@ -46,11 +59,39 @@ export default {
   mounted() {
     this.checkZoom();
     window.addEventListener('resize', this.checkZoom);
+    window.addEventListener('scroll', this.handleScroll);
+    this.scroll.offsetTop = this.$refs.kvLogo.offsetTop - 25;
+    this.scroll.offsetLeft = this.$refs.kvLogo.offsetLeft;
+    this.scroll.window = window.innerWidth;
+    this.scroll.container = document.querySelector('.container').offsetWidth;
+    this.scroll.margin = (this.scroll.window - this.scroll.container) / 2;
+    this.scroll.leftSpace = (this.scroll.offsetLeft - this.scroll.margin);
   },
   unmounted() {
     window.removeEventListener('resize', this.checkZoom);
+    window.addEventListener('scroll', this.handleScroll);
   },
   methods: {
+    handleScroll() {
+      const scroll = window.scrollY;
+      const percent = (scroll / this.scroll.offsetTop);
+      const basic = ((120 / 200));
+      if (percent < 1 && percent > 0) {
+        this.isSticky = false;
+        document.querySelector('.logo').style.transform = `
+          translateX(-${this.scroll.leftSpace * percent}px)
+          scale(${1 - ((1 - basic) * percent)})
+        `;
+      } else if (percent === 0) {
+        document.querySelector('.logo').style.transform = 'translateX(0) scale(1)';
+      } else if (percent >= 1 && percent < 1.2) {
+        this.isSticky = true;
+        document.querySelector('.logo').style.transform = `
+          translateX(-${this.scroll.leftSpace}px)
+          scale(${basic})
+        `;
+      }
+    },
     checkZoom() {
       const kv = this.$refs.kvVideo;
       const windows = {
@@ -69,6 +110,11 @@ export default {
       kv.style.transform = `translate(-50%, -50%) scale(${max})`;
     },
   },
+  watch: {
+    isSticky() {
+      this.$emitter.emit('emit-update-sticky', this.isSticky);
+    },
+  },
 };
 </script>
 
@@ -78,8 +124,6 @@ export default {
 section {
   position: relative;
   height: var(--app-height);
-  padding-top: 180px;
-  background-color: $black;
 }
 .video-mask {
   position: absolute;
@@ -88,14 +132,22 @@ section {
   width: 100%;
   height: var(--app-height);
   overflow: hidden;
+  z-index: -1;
 }
 .ratio {
   position: absolute;
   top: 50%;
   left: 50%;
   width: 100%;
-  &::after {
+  &::before, &::after {
     @include beforeafter;
+  }
+  &::before {
+    width: 100%;
+    height: 100%;
+    background-color: $black;
+  }
+  &::after {
     position: absolute;
     top: 0;
     left: 0;
@@ -106,8 +158,19 @@ section {
   }
 }
 .container {
-  position: relative;
-  z-index: 1;
+  height: 100%;
+  padding-top: 180px;
+  padding-left: 170px;
+  padding-right: 170px;
+}
+.logo {
+  position: sticky;
+  top: 25px;
+  transform-origin: top left;
+  transition: all 0.1s;
+  &.opacity-0 {
+    opacity: 0;
+  }
 }
 .display {
   margin-top: 34px;
@@ -145,6 +208,27 @@ section {
         border-radius: 10px;
       }
     }
+  }
+}
+.subtitle {
+  position: absolute;
+  top: 250px;
+  left: calc((100% - 1340px) / 2);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 25px;
+  color: $white;
+  font-weight: $font-weight-bold;
+  letter-spacing: 0.13875em;
+  white-space: nowrap;
+  writing-mode: vertical-lr;
+  transform: rotate(180deg);
+  &::before {
+    @include beforeafter;
+    width: 2px;
+    height: 115px;
+    background-color: currentColor;
   }
 }
 .scroll-notification {

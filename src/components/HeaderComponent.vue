@@ -1,9 +1,9 @@
 <template>
-  <header>
+  <header :class="{'is-sticky': isSticky}">
     <div class="container">
       <LogoComponent :style="logoTheme" />
       <StartButton />
-      <HamBurger />
+      <HamBurger :class="{'dark': isSticky}" />
     </div>
   </header>
 </template>
@@ -18,17 +18,26 @@ export default {
   data() {
     return {
       logoTheme: '',
+      isSticky: this.emitSticky,
     };
   },
+  props: ['emit-sticky'],
   components: {
     LogoComponent,
     StartButton,
     HamBurger,
   },
+  watch: {
+    emitSticky() {
+      this.isSticky = this.emitSticky;
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
+  @import '@/assets/sass/import';
+
   header {
     position: fixed;
     top: 0;
@@ -37,6 +46,16 @@ export default {
     min-height: 100px;
     padding-top: 25px;
     z-index: 10;
+    svg {
+      opacity: 0;
+      @include parent-append(".is-sticky",  1, false) {
+        opacity: 1;
+      }
+    }
+    &.is-sticky {
+      background-color: rgba($white, 0.9);
+      backdrop-filter: blur(10px);
+    }
   }
   .container {
     display: flex;
