@@ -2,13 +2,16 @@
   <section>
     <div class="container-fluid">
       <div class="col-text">
-        <HeaderTitle align="left" theme="primary">AWARDS</HeaderTitle>
-        <p>
+        <HeaderTitle
+          align="left" theme="primary"
+          data-aos="fade-up"
+        >AWARDS</HeaderTitle>
+        <p data-aos="fade-up">
           Cras quis nulla commodo, aliquam lectus sed, blandit augue. Cras ullamcorper bibendum bibendum. Duis tincidunt urna non pretium porta. Nam condimentum vitae ligula vel ornare. Phasellus at semper turpis. Nunc eu tellus tortor. Etiam at condimentum nisl, vitae sagittis orci. Donec id dignissim nunc.
         </p>
       </div>
       <div class="col-card-group">
-        <picture>
+        <picture data-aos="fade-up">
           <source type="image/avif" srcset="/images/award.avif"/>
           <source type="image/webp" srcset="/images/award.webp"/>
           <img
@@ -17,7 +20,7 @@
             loading="lazy"
           />
         </picture>
-        <picture>
+        <picture data-aos="fade-up">
           <source type="image/avif" srcset="/images/award.avif"/>
           <source type="image/webp" srcset="/images/award.webp"/>
           <img
@@ -26,7 +29,7 @@
             loading="lazy"
           />
         </picture>
-        <picture>
+        <picture data-aos="fade-up">
           <source type="image/avif" srcset="/images/award.avif"/>
           <source type="image/webp" srcset="/images/award.webp"/>
           <img
@@ -35,7 +38,7 @@
             loading="lazy"
           />
         </picture>
-        <picture>
+        <picture data-aos="fade-up">
           <source type="image/avif" srcset="/images/award.avif"/>
           <source type="image/webp" srcset="/images/award.webp"/>
           <img
@@ -128,8 +131,11 @@ export default {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    @include media-breakpoint-up(md) {
+    @include media-breakpoint-up(sm) {
       display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+    @include media-breakpoint-up(md) {
       grid-template-columns: 1fr 1fr;
       padding-left: 40px;
       width: 60%;
@@ -143,7 +149,7 @@ export default {
     }
     img {
       width: calc(50vw - 40px);
-      @include media-breakpoint-up(md) {
+      @include media-breakpoint-up(sm) {
         width: 100%;
       }
       @include media-breakpoint-up(lg) {

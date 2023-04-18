@@ -1,13 +1,22 @@
 <template>
   <section>
     <div class="container">
-      <HeaderTitle align="center" theme="dark">OUR INGREDIENTS</HeaderTitle>
-      <p>
+      <HeaderTitle
+        align="center" theme="dark"
+        data-aos="fade-up"
+      >OUR INGREDIENTS</HeaderTitle>
+      <p data-aos="fade-up">
         Cras quis nulla commodo, aliquam lectus sed, blandit augue. Cras ullamcorper bibendum bibendum. Duis tincidunt urna non pretium porta. Nam condimentum vitae ligula vel ornare. Phasellus at semper turpis. Nunc eu tellus tortor. Etiam at condimentum nisl, vitae sagittis orci. Donec id dignissim nunc. Donec elit ante, eleifend a dolor et, venenatis facilisis dolor. In feugiat orci odio, sed lacinia sem elementum quis. Aliquam consectetur, eros et vulputate euismod, nunc leo tempor lacus, ac rhoncus neque eros nec lacus. Cras lobortis molestie faucibus.
       </p>
-      <LinkButton theme="dark" link="/">VIEW MORE</LinkButton>
+      <LinkButton
+        theme="dark" link="/"
+        data-aos="fade-up"
+      >VIEW MORE</LinkButton>
       <div class="ingredient-group">
-        <div v-for="(item, index) in lists" :key="`ingredient-${index}`" class="ingredient-item">
+        <div
+          v-for="(item, index) in lists" :key="`ingredient-${index}`"
+          class="ingredient-item" data-aos="fade-up" :data-aos-delay="(index % 3) * 100"
+        >
           <img :src="`/images/ingredient/${item.file}`" :alt="item.title">
           <h3>
             {{ item.title }}
@@ -19,6 +28,11 @@
             VIEW MORE
           </ButtonOutlined>
         </div>
+      </div>
+      <div class="h5">
+        <a href="#!" class="btn-link" data-aos="fade-up">
+          VIEW MORE DIGISALAD’S INGRADIENTS
+        </a>
       </div>
     </div>
   </section>
@@ -176,6 +190,20 @@ export default {
       margin-top: auto;
       @include media-breakpoint-down(sm) {
         margin-left: 0;
+      }
+    }
+  }
+  .h5 {
+    margin-top: 100px;
+    text-align: center;
+    .btn-link {
+      padding-left: 0.1111111111em;
+      color: $white;
+      font-weight: $font-weight-bold;
+      letter-spacing: 0.1111111111em;
+      background: linear-gradient(180deg, rgba($white, 0) 55%, $highlight 55%, $highlight 95%, rgba($white, 0) 95%);
+      &:hover {
+        background: linear-gradient(180deg, rgba($white, 0) 55%, $turquoise 55%, $turquoise 95%, rgba($white, 0) 95%);
       }
     }
   }

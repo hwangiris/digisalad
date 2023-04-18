@@ -80,6 +80,12 @@ export default {
       margin-left: auto;
       margin-right: auto;
     }
+    &:not(.center) {
+      @include media-breakpoint-down(md) {
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
     &.primary {
       span:not(.decoration),
       svg path {

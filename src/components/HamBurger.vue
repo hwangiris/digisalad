@@ -32,7 +32,7 @@ export default {
 
   #hamburger {
     @include hamburger();
-    @at-root .dark & {
+    @at-root .dark:not(.opened) & {
       + label {
         --ham-color: #{$purple};
       }

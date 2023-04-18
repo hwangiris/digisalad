@@ -10,7 +10,7 @@
           loading="lazy"
         />
       </picture>
-      <div class="col-avatar">
+      <div class="col-avatar" data-aos="fade-up">
         <picture>
           <source type="image/avif" srcset="/images/tonyng.avif"/>
           <source type="image/webp" srcset="/images/tonyng.webp"/>
@@ -23,7 +23,7 @@
         <h3>Tony Ng</h3>
         <em>Founder & Creative Director</em>
       </div>
-      <div class="col-quote">
+      <div class="col-quote" data-aos="fade-up" :data-aos-delay="300">
         A great digital work isn’t about designing beautiful pages purely. It is about context - how do we deliver the <strong>right experience to the right person at the right time</strong>. The most important thing is that your work can engage customers at anytime, anywhere and let users experience an entire amazing digital journey.
       </div>
     </div>
@@ -119,18 +119,23 @@
     z-index: 1;
     img {
       position: static;
-      width: 205px;
+      width: 185px;
       border-radius: 50%;
+      @include media-breakpoint-up(xl) {
+        width: 205px;
+      }
     }
   }
   .col-avatar {
     width: 200px;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 30px;
     text-align: center;
     @include media-breakpoint-up(sm) {
       margin-left: 0;
       margin-right: 40px;
+      margin-bottom: 0;
     }
     @include media-breakpoint-up(md) {
       margin-right: 60px;

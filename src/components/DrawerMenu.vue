@@ -87,8 +87,18 @@ export default {
     height: 100%;
     padding-top: 95px;
     padding-bottom: 95px;
-    background: linear-gradient(180deg, $purple 3.61%, $primary 95.7%);
     z-index: 9;
+    &::before {
+      @include beforeafter;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, $purple 3.61%, $primary 95.7%);
+      opacity: .9;
+      z-index: -1;
+    }
   }
   ul {
     @include list;
@@ -99,12 +109,16 @@ export default {
     margin-right: auto;
     grid-column-gap: 20px;
     grid-row-gap: 20px;
-    @include media-breakpoint-up(md) {
+    @include media-breakpoint-up(sm) {
       display: grid;
-      grid-template-columns: 38fr 29fr 38fr;
-      grid-template-rows: 60px 210px 40px 70px 40px 10px 40px 160px 122px;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 60px 180px 40px 70px 40px 10px 40px 160px 122px;
       grid-column-gap: 20px;
       grid-row-gap: 0;
+    }
+    @include media-breakpoint-up(md) {
+      grid-template-rows: 60px 210px 40px 70px 40px 10px 40px 160px 122px;
+      grid-template-columns: 38fr 29fr 38fr;
     }
     @include media-breakpoint-up(lg) {
       grid-column-gap: 42px;
@@ -120,13 +134,15 @@ export default {
       margin-left: auto;
       margin-right: auto;
       text-transform: uppercase;
-      border-radius: 30px;
+      border-radius: 20px;
       overflow: hidden;
       @include media-breakpoint-up(sm) {
-        width: calc(50% - 10px);
+        height: 100%;
+        padding: 20px;
       }
       @include media-breakpoint-up(md) {
-        width: 100%;
+        padding: 40px 30px;
+        border-radius: 30px;
       }
       &::before {
         // @include beforeafter;
@@ -145,49 +161,43 @@ export default {
       }
       &:nth-child(1) {
         background-color: $primary;
-        @include media-breakpoint-up(md) {
+        @include media-breakpoint-up(sm) {
           grid-area: 2 / 1 / 3 / 2;
-          height: 210px;
           order: 1;
         }
       }
       &:nth-child(2) {
         background-color: $surface;
-        @include media-breakpoint-up(md) {
+        @include media-breakpoint-up(sm) {
           grid-area: 4 / 1 / 9 / 2;
-          height: 320px;
           order: 4;
         }
       }
       &:nth-child(3) {
         background-color: $highlight;
-        @include media-breakpoint-up(md) {
+        @include media-breakpoint-up(sm) {
           grid-area: 1 / 2 / 7 / 3;
-          height: 430px;
           order: 2;
         }
       }
       &:nth-child(4) {
         background-color: $blueGreen;
-        @include media-breakpoint-up(md) {
+        @include media-breakpoint-up(sm) {
           grid-area: 8 / 2 / 10 / 3;
-          height: 280px;
           order: 4;
         }
       }
       &:nth-child(5) {
         background-color: $purple;
-        @include media-breakpoint-up(md) {
+        @include media-breakpoint-up(sm) {
           grid-area: 2 / 3 / 5 / 4;
-          height: 320px;
           order: 3;
         }
       }
       &:nth-child(6) {
         background-color: $white;
-        @include media-breakpoint-up(md) {
+        @include media-breakpoint-up(sm) {
           grid-area: 6 / 3 / 9 / 4;
-          height: 210px;
           order: 6;
         }
       }

@@ -33,11 +33,14 @@ export default {
     display: table;
     margin-left: auto;
     margin-right: auto;
-    padding: 33px 24px;
+    padding: 25px 20px;
     color: $white;
     font-weight: $font-weight-bold;
     letter-spacing: 0.13875em;
     background-color: var(--btn-background);
+    @include media-breakpoint-up(md) {
+      padding: 33px 24px;
+    }
     &.large {
       @include media-breakpoint-up(lg) {
         padding: 60px 30px;

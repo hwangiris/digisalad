@@ -1,12 +1,18 @@
 <template>
   <section>
     <div class="container">
-      <HeaderTitle align="center" theme="primary">OUR BRAND EXPERIENCE</HeaderTitle>
-      <p>
+      <HeaderTitle
+        align="center" theme="primary"
+        data-aos="fade-up"
+      >OUR BRAND EXPERIENCE</HeaderTitle>
+      <p data-aos="fade-up">
         Cras quis nulla commodo, aliquam lectus sed, blandit augue. Cras ullamcorper bibendum bibendum. Duis tincidunt urna non pretium porta. Nam condimentum vitae ligula vel ornare. Phasellus at semper turpis. Nunc eu tellus tortor. Etiam at condimentum nisl, vitae sagittis orci. Donec id dignissim nunc. Donec elit ante, eleifend a dolor et, venenatis facilisis dolor. In feugiat orci odio, sed lacinia sem elementum quis. Aliquam consectetur, eros et vulputate euismod, nunc leo tempor lacus, ac rhoncus neque eros nec lacus. Cras lobortis molestie faucibus.
       </p>
       <div class="brand-group">
-        <div v-for="item in brands" :key="`BRAND EXPERIENCE-${item}`" class="brand-item">
+        <div
+          v-for="(item, index) in brands" :key="`BRAND EXPERIENCE-${item}`"
+          class="brand-item" data-aos="fade-up" :data-aos-delay="(index % 7) * 100"
+        >
           <img :src="item.image" :alt="`digisalad client - ${item.name}`" :title="item.name">
         </div>
       </div>

@@ -263,8 +263,11 @@ export default {
     }
     &:not(.dot) {
       fill: #26C6D0;
-      @at-root .mode-light #{&} {
-        fill: #fff;
+      @at-root {
+        .mode-light #{&},
+        .opened #{&} {
+          fill: #fff;
+        }
       }
       @at-root .mode-dark #{&} {
         fill: #000;

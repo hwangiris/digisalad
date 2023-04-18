@@ -1,9 +1,9 @@
 <template>
   <div>
-    <HeaderComponent :emit-sticky="isSticky" />
+    <HeaderComponent :emit-sticky="isSticky" :emit-ham="isOpenHam" />
     <DrawerMenu v-show="isOpenHam" />
     <KeyVisual :emit-sticky="isSticky" />
-    <AboutSection />
+    <AboutSection ref="aboutSection" />
     <AwardSection />
     <IngredientSection />
     <BeliefSection />
@@ -50,6 +50,12 @@ export default {
     });
     this.$emitter.on('emit-update-hamburger', (boolean) => {
       this.isOpenHam = boolean;
+    });
+    this.$emitter.on('emit-scroll-about', () => {
+      window.scroll({
+        top: window.innerHeight,
+        behavior: 'smooth',
+      });
     });
   },
   unmounted() {

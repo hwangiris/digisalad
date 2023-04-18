@@ -4,6 +4,15 @@
       <div ref="kvVideo" class="ratio ratio-16by9">
         <iframe src="https://www.youtube.com/embed/8_4JRK4QkqU?vq=hd1080&autoplay=1&mute=1&loop=1&modestbranding=1&rel=0&cc_load_policy=1&iv_load_policy=3&color=white&controls=0&disablekb=1&playlist=8_4JRK4QkqU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; modestbranding; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
       </div>
+      <picture>
+        <source type="image/avif" srcset="/images/kv/key-video.avif"/>
+        <source type="image/webp" srcset="/images/kv/key-video.webp"/>
+        <img
+          src="/images/kv/key-video.jpg"
+          alt="香港空拍景"
+          loading="lazy"
+        />
+      </picture>
     </div>
     <div class="container">
       <div class="logo" ref="kvLogo" :class="{'opacity-0': isSticky}">
@@ -23,7 +32,7 @@
       </div>
     </div>
     <div class="scroll-notification">
-      <button type="button">
+      <button type="button" @click="$emitter.emit('emit-scroll-about');">
         <DishAnime />
         <h6>TASTE US NOW!</h6>
       </button>
@@ -84,7 +93,7 @@ export default {
         `;
       } else if (percent === 0) {
         document.querySelector('.logo').style.transform = 'translateX(0) scale(1)';
-      } else if (percent >= 1 && percent < 1.2) {
+      } else if (percent >= 1) {
         this.isSticky = true;
         document.querySelector('.logo').style.transform = `
           translateX(-${this.scroll.leftSpace}px)
@@ -133,12 +142,6 @@ section {
   height: var(--app-height);
   overflow: hidden;
   z-index: -1;
-}
-.ratio {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100%;
   &::before, &::after {
     @include beforeafter;
   }
@@ -156,6 +159,29 @@ section {
     background-color: $black;
     opacity: .3;
   }
+  @media (pointer:none), (pointer:coarse) {
+    iframe {
+      display: none;
+    }
+  }
+}
+picture, img {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  @media (pointer:none), (pointer:coarse) {
+    display: block;
+  }
+}
+.ratio {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
 }
 .container {
   height: 100%;
@@ -177,12 +203,12 @@ section {
 .display {
   margin-top: 34px;
   color: $white;
-  font-size: $display*.6;
+  font-size: calc((100vw - 40px) / 17);
   font-weight: $font-weight-bold;
   line-height: 1.85;
   text-transform: uppercase;
   letter-spacing: .2412em;
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(sm) {
     font-size: $display;
   }
   span {

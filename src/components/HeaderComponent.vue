@@ -1,9 +1,24 @@
 <template>
-  <header :class="{'is-sticky': isSticky}">
+  <header
+    :class="{
+      'is-sticky': isSticky,
+      'opened': isOpened,
+    }"
+  >
     <div class="container">
-      <LogoComponent :style="logoTheme" />
+      <LogoComponent
+        :style="logoTheme"
+        :class="{
+          'opened': isOpened,
+        }"
+      />
       <StartButton />
-      <HamBurger :class="{'dark': isSticky}" />
+      <HamBurger
+        :class="{
+          'dark': isSticky,
+          'opened': isOpened,
+        }"
+      />
     </div>
   </header>
 </template>
@@ -19,9 +34,10 @@ export default {
     return {
       logoTheme: '',
       isSticky: this.emitSticky,
+      isOpened: this.emitHam,
     };
   },
-  props: ['emit-sticky'],
+  props: ['emit-sticky', 'emit-ham'],
   components: {
     LogoComponent,
     StartButton,
@@ -30,6 +46,9 @@ export default {
   watch: {
     emitSticky() {
       this.isSticky = this.emitSticky;
+    },
+    emitHam() {
+      this.isOpened = this.emitHam;
     },
   },
 };
@@ -51,8 +70,11 @@ export default {
       @include parent-append(".is-sticky",  1, false) {
         opacity: 1;
       }
+      @include parent-append(".opened",  1, false) {
+        opacity: 1;
+      }
     }
-    &.is-sticky {
+    &.is-sticky:not(.opened) {
       background-color: rgba($white, 0.9);
       backdrop-filter: blur(10px);
     }
