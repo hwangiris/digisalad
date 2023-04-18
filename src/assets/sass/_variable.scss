@@ -17,8 +17,11 @@ $container-max-widths: (
   sm: 100%,
   md: 100%,
   lg: 1170px,
-  xl: 1280px
+  xl: 1340px
 ) !default;
+
+$grid-gutter-width:   1.25rem !default;
+$container-padding-x: $grid-gutter-width !default;
 
 // ---------------------------------------------------------
 
@@ -30,6 +33,12 @@ $h3:      $spacer * 20; //20px
 $h4:      $spacer * 18; //18px
 $h5:      $spacer * 16; //16px
 $h6:      $spacer * 14; //14px
+$h1-m:    $spacer * 28; //28px
+$h2-m:    $spacer * 24; //24px
+$h3-m:    $spacer * 20; //20px
+$h4-m:    $spacer * 18; //18px
+$h5-m:    $spacer * 16; //16px
+$h6-m:    $spacer * 14; //14px
 
 $font-weight-normal: 400;
 $font-weight-bold:   700;

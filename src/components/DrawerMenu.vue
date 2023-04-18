@@ -2,58 +2,80 @@
   <nav>
     <div class="container">
       <ul>
-        <li>
-          <div class="vector">
+        <li v-for="(item, index) in lists" :key="`漢堡選單-${index}`">
+          <picture v-if="item.file">
+            <source type="image/avif" :srcset="`/images/drawer/${item.file}.avif`"/>
+            <source type="image/webp" :srcset="`/images/drawer/${item.file}.webp`"/>
+            <img
+              :src="`/images/drawer/${item.file}.jpg`"
+              :alt="item.file"
+              loading="lazy"
+            />
+          </picture>
+          <div class="vector" v-if="item.file">
+            <img :src="`/images/drawer/${item.file}.svg`" :alt="`${item.file} icon`">
           </div>
           <div class="text">
-            <div class="h6">EMPOWERING BRANDS</div>
-            <div class="h1"><b>ABOUT US</b></div>
+            <div class="h6">
+              {{ item.subtitle }}
+            </div>
+            <div class="h1">
+              <b>{{ item.title }}</b>
+            </div>
           </div>
-        </li>
-        <li>
-          <div class="vector">
-          </div>
-          <div class="text">
-            <div class="h6">CASE STUDIES</div>
-            <div class="h1"><b>WORKS</b></div>
-          </div>
-        </li>
-        <li>
-          <div class="vector">
-          </div>
-          <div class="text">
-            <div class="h6">BE COOL WITH US</div>
-            <div class="h1"><b>CAREERS</b></div>
-          </div>
-        </li>
-        <li>
-          <div class="vector">
-          </div>
-          <div class="text">
-            <div class="h6">OUR STRATEGIES</div>
-            <div class="h1"><b>INSIGHTS</b></div>
-          </div>
-        </li>
-        <li>
-          <div class="vector">
-          </div>
-          <div class="text">
-            <div class="h6">AREAS OF EXPERTISE</div>
-            <div class="h1"><b>SERVICES</b></div>
-          </div>
-        </li>
-        <li>
-          <div class="vector">
-          </div>
-          <div class="text">
-            <div class="h6">START YOUR JOURNEY WITH US</div>
-            <div class="h1"><b>CONTACT</b></div>
-          </div>
+          <a :href="item.link" class="stretched-link"></a>
         </li>
       </ul>
     </div>
   </nav>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      lists: [
+        {
+          link: '/',
+          file: 'about',
+          title: 'about us',
+          subtitle: 'empowering brands',
+        },
+        {
+          link: '/',
+          file: 'works',
+          title: 'works',
+          subtitle: 'case studies',
+        },
+        {
+          link: '/',
+          file: 'careers',
+          title: 'careers',
+          subtitle: 'be cool with us',
+        },
+        {
+          link: '/',
+          file: 'insights',
+          title: 'insights',
+          subtitle: 'our strategies',
+        },
+        {
+          link: '/',
+          file: 'service',
+          title: 'services',
+          subtitle: 'areas of expertise',
+        },
+        {
+          link: '/',
+          file: '',
+          title: 'contact',
+          subtitle: 'start your journey with us',
+        },
+      ],
+    };
+  },
+};
+</script>
 
 <style lang="scss" scoped>
   @import '@/assets/sass/import';
@@ -70,22 +92,44 @@
   }
   ul {
     @include list;
-    display: grid;
-    grid-template-columns: 380px 290px 380px;
+    display: flex;
+    flex-wrap: wrap;
     max-width: 1134px;
     margin-left: auto;
     margin-right: auto;
-    gap: 40px 42px;
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+    @include media-breakpoint-up(md) {
+      display: grid;
+      grid-template-columns: 38fr 29fr 38fr;
+      grid-template-rows: 60px 210px 40px 70px 40px 10px 40px 160px 122px;
+      grid-column-gap: 20px;
+      grid-row-gap: 0;
+    }
+    @include media-breakpoint-up(lg) {
+      grid-column-gap: 42px;
+    }
     li {
       position: relative;
+      display: flex;
+      flex-wrap: wrap;
+      align-content: flex-end;
+      align-items: flex-end;
       width: 100%;
-      padding: 40px;
+      padding: 40px 30px;
       margin-left: auto;
       margin-right: auto;
+      text-transform: uppercase;
       border-radius: 30px;
       overflow: hidden;
+      @include media-breakpoint-up(sm) {
+        width: calc(50% - 10px);
+      }
+      @include media-breakpoint-up(md) {
+        width: 100%;
+      }
       &::before {
-        @include beforeafter;
+        // @include beforeafter;
         position: absolute;
         top: 0;
         left: 0;
@@ -100,38 +144,62 @@
         color: $white;
       }
       &:nth-child(1) {
-        height: 210px;
         background-color: $primary;
-        order: 1;
+        @include media-breakpoint-up(md) {
+          grid-area: 2 / 1 / 3 / 2;
+          height: 210px;
+          order: 1;
+        }
       }
       &:nth-child(2) {
-        height: 320px;
         background-color: $surface;
-        order: 4;
+        @include media-breakpoint-up(md) {
+          grid-area: 4 / 1 / 9 / 2;
+          height: 320px;
+          order: 4;
+        }
       }
       &:nth-child(3) {
-        height: 430px;
         background-color: $highlight;
-        order: 2;
+        @include media-breakpoint-up(md) {
+          grid-area: 1 / 2 / 7 / 3;
+          height: 430px;
+          order: 2;
+        }
       }
       &:nth-child(4) {
-        height: 280px;
         background-color: $blueGreen;
-        order: 4;
+        @include media-breakpoint-up(md) {
+          grid-area: 8 / 2 / 10 / 3;
+          height: 280px;
+          order: 4;
+        }
       }
       &:nth-child(5) {
-        height: 320px;
         background-color: $purple;
-        order: 3;
+        @include media-breakpoint-up(md) {
+          grid-area: 2 / 3 / 5 / 4;
+          height: 320px;
+          order: 3;
+        }
       }
       &:nth-child(6) {
-        height: 210px;
         background-color: $white;
-        order: 6;
+        @include media-breakpoint-up(md) {
+          grid-area: 6 / 3 / 9 / 4;
+          height: 210px;
+          order: 6;
+        }
+      }
+      > div {
+        position: relative;
+        z-index: 1;
       }
     }
   }
   .h1 {
+    letter-spacing: 0.11375em;
+    line-height: 1.25;
     &::after {
       @include beforeafter('', inline-block);
       width: 10px;
@@ -149,5 +217,42 @@
   }
   .h6 {
     margin-bottom: 10px;
+    letter-spacing: 0.1125em;
+    line-height: 1.125;
+  }
+  .vector {
+    width: 100%;
+    @include media-breakpoint-up(md) {
+      width: auto;
+    }
+    @at-root li:nth-child(1) #{&} {
+      padding-left: 7px;
+      padding-right: 28px;
+    }
+    @at-root li:nth-child(2) #{&} {
+      padding-right: 18px;
+    }
+    @at-root li:nth-child(3) #{&} {
+      margin-bottom: 28px;
+    }
+    @at-root {
+      li:nth-child(4) #{&},
+      li:nth-child(5) #{&} {
+        width: 100%;
+        margin-bottom: 15px;
+      }
+    }
+  }
+  picture {
+    display: block;
+    opacity: .08;
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   }
 </style>

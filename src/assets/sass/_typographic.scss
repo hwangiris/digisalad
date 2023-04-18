@@ -1,7 +1,11 @@
-$h-size: $h1, $h2, $h3, $h4, $h5, $h6;
+$h-size:   $h1, $h2, $h3, $h4, $h5, $h6;
+$h-size-m: $h1-m, $h2-m, $h3-m, $h4-m, $h5-m, $h6-m;
 
 @for $i from 1 through 6 {
   h#{$i}, .h#{$i} {
-    font-size: nth($h-size, $i);
+    font-size: nth($h-size-m, $i);
+    @include media-breakpoint-up(md) {
+      font-size: nth($h-size, $i);
+    }
   }
 }

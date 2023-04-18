@@ -34,12 +34,17 @@ export default {
   h2 {
     position: relative;
     display: table;
-    padding-left: 24px;
-    padding-right: 24px;
+    padding-left: 16px;
+    padding-right: 16px;
     padding-bottom: 20px;
     margin-top: 0;
     margin-bottom: 0;
-    letter-spacing: .12925em;
+    letter-spacing: .12925em/2;
+    @include media-breakpoint-up(md) {
+      padding-left: 24px;
+      padding-right: 24px;
+      letter-spacing: .12925em;
+    }
     &::after {
       @include beforeafter('', inline-block);
       width: 10px;

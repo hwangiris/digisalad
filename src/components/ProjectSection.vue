@@ -131,18 +131,27 @@ export default {
 
   section {
     color: $white;
-    border-bottom-left-radius: 50px;
-    border-bottom-right-radius: 50px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
     overflow: hidden;
+    @include media-breakpoint-up(sm) {
+      border-top-left-radius: 50px;
+      border-bottom-left-radius: 50px;
+    }
   }
   .container {
     position: relative;
-    display: flex;
     padding-top: 170px;
     padding-bottom: 170px;
-    padding-left: 150px;
-    padding-right: 150px;
     z-index: 1;
+    @include media-breakpoint-up(sm) {
+      display: grid;
+      grid-template-columns: 27fr 38fr;
+    }
+    @include media-breakpoint-up(xl) {
+      padding-left: 150px;
+      padding-right: 150px;
+    }
   }
   .swiper-slide {
     position: relative;
@@ -206,7 +215,6 @@ export default {
   }
   .col-img {
     position: relative;
-    width: 540px;
     img {
       display: block;
       width: 100%;
@@ -214,9 +222,14 @@ export default {
     }
   }
   .col-text {
-    width: calc(100% - 540px);
-    padding-top: 60px;
-    padding-left: 65px;
+    @include media-breakpoint-up(sm) {
+      padding-top: 25px;
+      padding-left: 30px;
+    }
+    @include media-breakpoint-up(xl) {
+      padding-top: 60px;
+      padding-left: 65px;
+    }
     h6 {
       margin-top: 0;
       margin-bottom: 20px;
@@ -263,9 +276,17 @@ export default {
   }
 
   a {
-    position: absolute;
-    bottom: -88px;
-    right: -70px;
+    margin-top: 30px;
+    @include media-breakpoint-up(md) {
+      position: absolute;
+      bottom: -45px;
+      right: -100px;
+      margin-top: 0;
+    }
+    @include media-breakpoint-up(lg) {
+      bottom: -88px;
+      right: -70px;
+    }
   }
 
   ::v-deep(.swiper-pagination-fraction) {

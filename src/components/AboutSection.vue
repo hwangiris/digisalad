@@ -35,7 +35,7 @@ export default {
     max-width: 1010px;
   }
   .ratio {
-    width: 960px;
+    max-width: 960px;
     margin-top: 70px;
     margin-bottom: 30px;
     margin-left: auto;

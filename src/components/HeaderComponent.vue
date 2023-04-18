@@ -63,9 +63,15 @@ export default {
   }
   button {
     margin-left: auto;
+    @include media-breakpoint-down(md) {
+      display: none;
+    }
   }
   .hamburger {
-    margin-left: 44px;
-    margin-right: 10px;
+    margin-left: auto;
+    @include media-breakpoint-up(md) {
+      margin-left: 44px;
+      margin-right: 10px;
+    }
   }
 </style>

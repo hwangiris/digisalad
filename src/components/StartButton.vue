@@ -18,6 +18,7 @@
     font-size: $h6;
     font-weight: $font-weight-bold;
     letter-spacing: .0816em;
+    white-space: nowrap;
     background-color: transparent;
     border-width: 0;
     border-radius: $axisY*2;

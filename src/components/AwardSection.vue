@@ -63,7 +63,13 @@ export default {
   @import '@/assets/sass/import';
   section {
     position: relative;
-    padding-left: calc((100vw - 1240px) / 2);
+    padding-left: $grid-gutter-width/2;
+    @include media-breakpoint-up(md) {
+      padding-left: 70px;
+    }
+    @include media-breakpoint-up(lg) {
+      padding-left: calc((100vw - 1240px) / 2);
+    }
     &::before {
       @include beforeafter;
       position: absolute;
@@ -72,18 +78,36 @@ export default {
       width: 100%;
       height: 50%;
       background-color: $primary;
-      border-top-left-radius: 50px;
+      border-top-left-radius: 30px;
       z-index: -1;
+      @include media-breakpoint-up(sm) {
+        border-top-left-radius: 50px;
+      }
     }
   }
   .container-fluid {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    padding: 65px calc(((100vw - 1240px) / 2) + 70px) 65px 70px;
+    padding-top: 65px;
+    padding-bottom: 65px;
     background-color: $white;
-    border-top-left-radius: 50px;
-    border-bottom-left-radius: 50px;
-    border-bottom-right-radius: 50px;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    @include media-breakpoint-up(sm) {
+      border-top-left-radius: 50px;
+      border-bottom-left-radius: 50px;
+      border-bottom-right-radius: 50px;
+    }
+    @include media-breakpoint-up(md) {
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+    @include media-breakpoint-up(xl) {
+      padding-left: 70px;
+      padding-right: calc(((100vw - 1240px) / 2) + 70px);
+    }
   }
   p {
     margin-top: 30px;
@@ -93,16 +117,38 @@ export default {
     line-height: 1.75;
   }
   .col-text {
-    width: 416px;
+    @include media-breakpoint-up(md) {
+      width: 40%;
+    }
+    @include media-breakpoint-up(lg) {
+      width: 416px;
+    }
   }
   .col-card-group {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px 40px;
-    padding-left: 40px;
-    width: calc(100% - 416px);
+    gap: 20px;
+    @include media-breakpoint-up(md) {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-left: 40px;
+      width: 60%;
+    }
+    @include media-breakpoint-up(lg) {
+      gap: 20px 40px;
+      width: 285px + 285px + 40px + 40px;
+    }
+    > * {
+      display: table;
+    }
     img {
-      width: 285px;
+      width: calc(50vw - 40px);
+      @include media-breakpoint-up(md) {
+        width: 100%;
+      }
+      @include media-breakpoint-up(lg) {
+        width: 285px;
+      }
     }
   }
 </style>

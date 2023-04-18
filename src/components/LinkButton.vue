@@ -39,10 +39,12 @@ export default {
     letter-spacing: 0.13875em;
     background-color: var(--btn-background);
     &.large {
-      padding: 60px 30px;
-      &::after {
-        width: 70px;
-        margin-left: 2em;
+      @include media-breakpoint-up(lg) {
+        padding: 60px 30px;
+        &::after {
+          width: 70px;
+          margin-left: 2em;
+        }
       }
     }
     &::after {

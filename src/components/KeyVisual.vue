@@ -160,8 +160,10 @@ section {
 .container {
   height: 100%;
   padding-top: 180px;
-  padding-left: 170px;
-  padding-right: 170px;
+  @include media-breakpoint-up(xl) {
+    padding-left: 170px;
+    padding-right: 170px;
+  }
 }
 .logo {
   position: sticky;
@@ -175,11 +177,14 @@ section {
 .display {
   margin-top: 34px;
   color: $white;
-  font-size: $display;
+  font-size: $display*.6;
   font-weight: $font-weight-bold;
   line-height: 1.85;
   text-transform: uppercase;
   letter-spacing: .2412em;
+  @include media-breakpoint-up(md) {
+    font-size: $display;
+  }
   span {
     display: table;
     padding-left: .2412em;
