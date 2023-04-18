@@ -1,31 +1,33 @@
 <template>
   <nav>
-    <div class="container">
-      <ul>
-        <li v-for="(item, index) in lists" :key="`漢堡選單-${index}`">
-          <picture v-if="item.file">
-            <source type="image/avif" :srcset="`/images/drawer/${item.file}.avif`"/>
-            <source type="image/webp" :srcset="`/images/drawer/${item.file}.webp`"/>
-            <img
-              :src="`/images/drawer/${item.file}.jpg`"
-              :alt="item.file"
-              loading="lazy"
-            />
-          </picture>
-          <div class="vector" v-if="item.file">
-            <img :src="`/images/drawer/${item.file}.svg`" :alt="`${item.file} icon`">
-          </div>
-          <div class="text">
-            <div class="h6">
-              {{ item.subtitle }}
+    <div class="container-fluid">
+      <div class="container">
+        <ul>
+          <li v-for="(item, index) in lists" :key="`漢堡選單-${index}`">
+            <picture v-if="item.file">
+              <source type="image/avif" :srcset="`/images/drawer/${item.file}.avif`"/>
+              <source type="image/webp" :srcset="`/images/drawer/${item.file}.webp`"/>
+              <img
+                :src="`/images/drawer/${item.file}.jpg`"
+                :alt="item.file"
+                loading="lazy"
+              />
+            </picture>
+            <div class="vector" v-if="item.file">
+              <img :src="`/images/drawer/${item.file}.svg`" :alt="`${item.file} icon`">
             </div>
-            <div class="h1">
-              <b>{{ item.title }}</b>
+            <div class="text">
+              <div class="h6">
+                {{ item.subtitle }}
+              </div>
+              <div class="h1">
+                <b>{{ item.title }}</b>
+              </div>
             </div>
-          </div>
-          <a :href="item.link" class="stretched-link"></a>
-        </li>
-      </ul>
+            <a :href="item.link" class="stretched-link"></a>
+          </li>
+        </ul>
+      </div>
     </div>
   </nav>
 </template>
@@ -85,8 +87,6 @@ export default {
     left: 0;
     width: 100%;
     height: 100%;
-    padding-top: 95px;
-    padding-bottom: 95px;
     z-index: 9;
     &::before {
       @include beforeafter;
@@ -98,6 +98,14 @@ export default {
       background: linear-gradient(180deg, $purple 3.61%, $primary 95.7%);
       opacity: .9;
       z-index: -1;
+    }
+  }
+  .container-fluid {
+    height: 100%;
+    padding: 95px 0;
+    overflow: scroll;
+    &::-webkit-scrollbar {
+      display: none;
     }
   }
   ul {

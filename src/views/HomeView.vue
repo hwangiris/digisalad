@@ -50,6 +50,7 @@ export default {
     });
     this.$emitter.on('emit-update-hamburger', (boolean) => {
       this.isOpenHam = boolean;
+      document.body.classList = boolean ? 'opened' : '';
     });
     this.$emitter.on('emit-scroll-about', () => {
       window.scroll({
