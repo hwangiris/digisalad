@@ -185,7 +185,13 @@ picture, img {
 }
 .container {
   height: 100%;
-  padding-top: 180px;
+  padding-top: 70px;
+  @media screen and (min-width: 360px) {
+    padding-top: 100px;
+  }
+  @include media-breakpoint-up(sm) {
+    padding-top: 180px;
+  }
   @include media-breakpoint-up(xl) {
     padding-left: 170px;
     padding-right: 170px;
@@ -201,14 +207,19 @@ picture, img {
   }
 }
 .display {
-  margin-top: 34px;
+  margin-top: 20px;
   color: $white;
-  font-size: calc((100vw - 40px) / 17);
+  font-size: $display * .7;
   font-weight: $font-weight-bold;
-  line-height: 1.85;
+  line-height: 1.5;
   text-transform: uppercase;
   letter-spacing: .2412em;
+  @include media-breakpoint-up(xs) {
+    font-size: $display * .9;
+    line-height: 1.85;
+  }
   @include media-breakpoint-up(sm) {
+    margin-top: 34px;
     font-size: $display;
   }
   span {
@@ -216,21 +227,15 @@ picture, img {
     padding-left: .2412em;
     &:last-child {
       position: relative;
+      display: inline;
+      background: linear-gradient(180deg, rgba($white, 0) 60%, $primary 60%, $primary 85%, rgba($white, 0) 85%);
       z-index: 1;
-      &::before,
+      @include media-breakpoint-up(sm) {
+        background: linear-gradient(180deg, rgba($white, 0) 68%, $primary 68%, $primary 87%, rgba($white, 0) 87%);
+      }
       &::after {
         position: absolute;
         @include beforeafter;
-      }
-      &::before {
-        bottom: .5em;
-        left: 0;
-        width: 100%;
-        height: 8px;
-        background-color: $primary;
-        z-index: -1;
-      }
-      &::after {
         bottom: calc(.5em + 3px);
         left: calc(100% + 10px);
         width: 10px;
