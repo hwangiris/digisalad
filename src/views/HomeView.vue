@@ -1,7 +1,7 @@
 <template>
   <div>
     <HeaderComponent :emit-sticky="isSticky" :emit-ham="isOpenHam" />
-    <DrawerMenu v-show="isOpenHam" />
+    <DrawerMenu v-show="isOpenHam" :emit-ham="isOpenHam" />
     <KeyVisual :emit-sticky="isSticky" />
     <AboutSection ref="aboutSection" />
     <AwardSection />

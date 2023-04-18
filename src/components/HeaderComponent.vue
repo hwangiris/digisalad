@@ -72,6 +72,7 @@ export default {
       }
       @include parent-append(".opened",  1, false) {
         opacity: 1;
+        margin-right: auto;
       }
     }
     &.is-sticky:not(.opened) {
@@ -86,6 +87,9 @@ export default {
   button {
     margin-left: auto;
     @include media-breakpoint-down(md) {
+      display: none;
+    }
+    @at-root .opened #{&} {
       display: none;
     }
   }

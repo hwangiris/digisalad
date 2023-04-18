@@ -17,7 +17,7 @@
 }
 
 .stretched-link::after {
-  // @include beforeafter;
+  @include beforeafter;
   position: absolute;
 	top: 0;
 	right: 0;

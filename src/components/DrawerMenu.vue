@@ -3,7 +3,10 @@
     <div class="container-fluid">
       <div class="container">
         <ul>
-          <li v-for="(item, index) in lists" :key="`漢堡選單-${index}`">
+          <li
+            v-for="(item, index) in lists" :key="`漢堡選單-${index}`"
+            :class="aosClass" class="aos-init" data-aos="fade-up" :data-aos-delay="`${index}00`"
+          >
             <picture v-if="item.file">
               <source type="image/avif" :srcset="`/images/drawer/${item.file}.avif`"/>
               <source type="image/webp" :srcset="`/images/drawer/${item.file}.webp`"/>
@@ -36,6 +39,8 @@
 export default {
   data() {
     return {
+      opened: this.emitHam,
+      aosClass: '',
       lists: [
         {
           link: '/',
@@ -75,6 +80,33 @@ export default {
         },
       ],
     };
+  },
+  props: ['emit-ham'],
+  mounted() {
+    const allListItem = document.querySelectorAll('nav ul li');
+    for (let index = 0; index < allListItem.length; index += 1) {
+      const element = allListItem[index];
+      setTimeout(() => {
+        element.classList.remove('aos-animate');
+      }, 100);
+    }
+  },
+  methods: {
+    returnClass() {
+      if (this.opened) {
+        setTimeout(() => {
+          this.aosClass = 'aos-animate';
+        }, 100);
+      } else {
+        this.aosClass = '';
+      }
+    },
+  },
+  watch: {
+    emitHam() {
+      this.opened = this.emitHam;
+      this.returnClass();
+    },
   },
 };
 </script>
@@ -159,6 +191,11 @@ export default {
         left: 0;
         width: 100%;
         height: 100%;
+      }
+      &:hover {
+        picture {
+          opacity: 0.15;
+        }
       }
       &:nth-child(1),
       &:nth-child(2),
@@ -264,6 +301,7 @@ export default {
   picture {
     display: block;
     opacity: .08;
+    transition: opacity .3s;
     img {
       position: absolute;
       top: 0;
