@@ -52,7 +52,7 @@
             </div>
             <LinkButton
               theme="primary" size="large" :link="item.link"
-              data-aos="fade-up" data-aos-delay="900"
+              data-aos="fade-up" data-aos-delay="600"
             >VIEW PROJECT</LinkButton>
           </div>
         </div>
