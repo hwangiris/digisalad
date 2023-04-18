@@ -15,7 +15,7 @@
           <source type="image/avif" srcset="/images/award.avif"/>
           <source type="image/webp" srcset="/images/award.webp"/>
           <img
-            src="/images/award.jpg"
+            src="/images/award.png"
             alt="Asia Smart App Award 2018/2019"
             loading="lazy"
           />
@@ -24,7 +24,7 @@
           <source type="image/avif" srcset="/images/award.avif"/>
           <source type="image/webp" srcset="/images/award.webp"/>
           <img
-            src="/images/award.jpg"
+            src="/images/award.png"
             alt="Asia Smart App Award 2018/2019"
             loading="lazy"
           />
@@ -33,7 +33,7 @@
           <source type="image/avif" srcset="/images/award.avif"/>
           <source type="image/webp" srcset="/images/award.webp"/>
           <img
-            src="/images/award.jpg"
+            src="/images/award.png"
             alt="Asia Smart App Award 2018/2019"
             loading="lazy"
           />
@@ -42,7 +42,7 @@
           <source type="image/avif" srcset="/images/award.avif"/>
           <source type="image/webp" srcset="/images/award.webp"/>
           <img
-            src="/images/award.jpg"
+            src="/images/award.png"
             alt="Asia Smart App Award 2018/2019"
             loading="lazy"
           />
